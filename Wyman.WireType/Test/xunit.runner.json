@@ -1,0 +1,8 @@
+﻿{
+  "appDomain": "ifAvailable",
+  "diagnosticMessages": true,
+  "methodDisplay": "method",
+  "parallelizeAssembly": true,
+  "preEnumerateTheories": true,
+  "internalDiagnosticMessages": true
+}

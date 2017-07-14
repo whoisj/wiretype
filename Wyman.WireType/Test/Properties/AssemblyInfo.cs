@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 [assembly: AssemblyTitle("WireType IDL Compiler Test Suite")]
 [assembly: AssemblyDescription("")]
@@ -14,3 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("19781214-10f8-4f86-b6e9-c3360b052dbc")]
 [assembly: AssemblyVersion("0.1.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: CollectionBehavior(MaxParallelThreads = 1, DisableTestParallelization = true)]

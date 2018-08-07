@@ -1,0 +1,5 @@
+phases:
+  - template: vsts-tt.yml
+    parameters:
+      QueueName: 'Hosted VS2017'
+      PublishArtifacts: []

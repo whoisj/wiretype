@@ -1,0 +1,22 @@
+phases:
+  - template: vsts-tt.yml
+    parameters:
+      QueueName: 'Hosted VS2017'
+      PublishArtifacts:
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: Binary Log'
+          continueOnError: true
+          condition:  eq(variables['system.pullrequest.isfork'], false)
+          inputs:
+            pathtoPublish: '$(Build.SourcesDirectory)\$(build.buildNumber).binlog'
+            artifactName: '$(build.buildNumber).binlog'
+            publishLocation: Container
+        
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Artifact: Binaries'
+          continueOnError: true
+          condition: and(succeeded(), eq(variables['system.pullrequest.isfork'], false))
+          inputs:
+            pathtoPublish: '$(Build.SourcesDirectory)\Wyman.WireType\Src\bin\release\'
+            artifactName: '$(Build.BuildNumber).output'
+            publishLocation: Container

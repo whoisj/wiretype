@@ -1,0 +1,66 @@
+parameters:
+  QueueName: ''
+  PublishArtifacts: []
+
+phases:
+  - phase: Build
+    queue:
+      name: ${{ parameters.QueueName }}
+      demands: 
+      - msbuild
+      - visualstudio
+      - vstest
+    
+    steps:
+    - task: NuGetToolInstaller@0
+      displayName: 'Use NuGet 4.4.0'
+      inputs:
+        versionSpec: 4.4.0
+    
+    - task: NuGetCommand@2
+      displayName: NuGet restore
+      inputs:
+        restoreSolution: '$(Build.Solution)'
+        verbosityRestore: 'quiet'
+    
+    - task: NuGetCommand@2
+      displayName: NuGet restore
+      inputs:
+        command: custom
+        arguments: restore '$(Build.SourcesDirectory)\$(Build.Target)' '-SolutionDirectory $(Build.SourcesDirectory)'
+    
+    - task: MSBuild@1
+      displayName: 'Core Build'
+      inputs:
+        solution: '$(Build.Target)'
+        msbuildArguments: '/nologo /verbosity:$(Build.Verbosity) /binaryLogger:$(Build.SourcesDirectory)/$(build.buildNumber).binlog'
+        platform: '$(Build.Platform)'
+        configuration: '$(Build.Configuration)'
+        maximumCpuCount: false
+        msbuildArchitecture: '$(Build.Architecture)'
+    
+    - task: VSTest@2
+      displayName: 'Execute Tests (Xunit)'
+      inputs:
+        testAssemblyVer2: |
+         **\*Test.dll
+         !**\xunit.*.dll
+         !**\obj\**
+        searchFolder: '$(Build.SourcesDirectory)'
+        runInParallel: true
+        runTestsInIsolation: true
+        codeCoverageEnabled: true
+        platform: '$(Build.Platform)'
+        configuration: '$(Build.Configuration)'
+    
+    - ${{ parameters.PublishArtifacts }}
+    
+    - task: DeleteFiles@1
+      displayName: 'Delete Artifacts from Agent'
+      inputs:
+        sourceFolder: '$(Build.SourcesDirectory)'
+        contents: |
+         *.binlog
+         **\bin\**\*.*
+         **\obj\**\*.*
+    

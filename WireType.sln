@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WireType", "Wyman.WireType\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WireType.Test", "Wyman.WireType\Test\WireType.Test.csproj", "{19781214-10F8-4F86-B6E9-C3360B052DBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleCSharp", "SampleCSharp\SampleCSharp.csproj", "{27C4836B-A9D3-4C86-894E-5BDCB84EA17D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleCSharp", "Samples\CSharp\SampleCSharp.csproj", "{27C4836B-A9D3-4C86-894E-5BDCB84EA17D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_ansi_c", "sample_ansi_c\sample_ansi_c.vcxproj", "{61B4E2F1-06CA-4E66-8E79-A479FAC87DBD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_ansi_c", "Samples\ansi_c\sample_ansi_c.vcxproj", "{61B4E2F1-06CA-4E66-8E79-A479FAC87DBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfCli", "PerfCli\PerfCli.csproj", "{FC45B7F5-3182-411B-AE25-01A6713D0B8D}"
 EndProject
